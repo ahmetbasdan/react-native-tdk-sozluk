@@ -4,6 +4,9 @@ import {
   TextInputEndEditingEventData,
   View,
   StyleSheet,
+  TouchableOpacity,
+  GestureResponderEvent,
+  ViewStyle,
 } from "react-native";
 import React from "react";
 import { Feather } from "@expo/vector-icons";
@@ -16,24 +19,35 @@ interface ISearchBox {
     | ((e: NativeSyntheticEvent<TextInputEndEditingEventData>) => void)
     | undefined;
   onChangeText?: ((text: string) => void) | undefined;
+  searchOnPress?: ((event: GestureResponderEvent) => void) | undefined;
+  containerStyle?: ViewStyle;
   placeholder?: string;
 }
 
 const SearchBox: React.FC<ISearchBox> = ({
   onChangeText,
   onEndEditing,
+  searchOnPress,
+  containerStyle,
   placeholder = "Kelime Arama...",
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, ...containerStyle }}>
       <TextInput
         style={styles.input}
         placeholder={placeholder}
         returnKeyType="search"
-        onEndEditing={onEndEditing}
+        onSubmitEditing={onEndEditing}
         onChangeText={onChangeText}
       />
-      <Feather name="search" size={18} style={styles.icon} color="grey" />
+
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={searchOnPress}
+        style={styles.iconContainer}
+      >
+        <Feather name="search" size={18} color="grey" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -53,8 +67,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     paddingHorizontal: 12,
   },
-  icon: {
+  iconContainer: {
     position: "absolute",
-    right: 16,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    width: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

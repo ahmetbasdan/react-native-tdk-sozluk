@@ -2,12 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import Home from "./src/screens/Home";
 import Constants from "expo-constants";
-import { PRİMARY_COLOR, STATUSBAR_COLOR } from "./src/helpers/colorHelpers";
+import { STATUSBAR_COLOR } from "./src/helpers/colorHelpers";
 
 export default function App() {
   return (
     <>
-      <StatusBar style="auto" backgroundColor={STATUSBAR_COLOR} />
+      <StatusBar style="light" backgroundColor={STATUSBAR_COLOR} />
       <View style={styles.container}>
         <Home />
       </View>

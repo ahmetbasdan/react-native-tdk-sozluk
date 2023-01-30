@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Text } from "react-native";
 import React from "react";
 import Space from "./Space";
 
@@ -26,6 +26,8 @@ const SingLanguageList: React.FC<ISingLanguageList> = ({ word = "" }) => {
               style={styles.signExpression}
             />
           </View>
+          <Space s6 />
+          <Text style={styles.char}>{item.toUpperCase()}</Text>
           <Space s6 />
         </View>
       ))}
@@ -59,5 +61,9 @@ const styles = StyleSheet.create({
     width: WIDTH * 0.8,
     alignSelf: "stretch",
     borderRadius: 12,
+  },
+  char: {
+    alignSelf: "center",
+    fontSize: 17,
   },
 });
